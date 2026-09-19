@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Space</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <style>
+        html { scroll-behavior: smooth; }
+        .btn-hover { background: #06B6D4; color: white; transition: background .3s; }
+        .btn-hover:hover { background: #0891B2; color: white; }
+        .card-hover { transition: transform .3s, box-shadow .3s; cursor: pointer; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(6,182,212,.2); }
+
+        .carousel-wrap { max-width: 750px; margin: 0 auto; border-radius: 1rem; border: 3px solid #06B6D4; overflow: hidden; position: relative; }
+        .carousel-track { display: flex; width: 400%; transition: transform 0.5s ease; }
+        .slide { width: 25%; flex-shrink: 0; }
+        .slide img { width: 100%; height: 450px; object-fit: cover; display: block; }
+        [name="carousel"] { display: none; }
+
+        #s1:checked ~ .carousel-track { transform: translateX(0); }
+        #s2:checked ~ .carousel-track { transform: translateX(-25%); }
+        #s3:checked ~ .carousel-track { transform: translateX(-50%); }
+        #s4:checked ~ .carousel-track { transform: translateX(-75%); }
+
+        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; color: #06B6D4; font-size: 1.5rem; cursor: pointer; z-index: 20; box-shadow: 0 2px 8px rgba(0,0,0,.2); border: none; }
+        .prev { left: 15px; }
+        .next { right: 15px; }
+
+        .nav-btn { display: none; }
+
+        #s1:checked ~ .btn-wrap .btn-s1 { display: flex; }
+        #s2:checked ~ .btn-wrap .btn-s2 { display: flex; }
+        #s3:checked ~ .btn-wrap .btn-s3 { display: flex; }
+        #s4:checked ~ .btn-wrap .btn-s4 { display: flex; }
+
+        .dots-wrap { position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; z-index: 20; }
+        .dot { width: 14px; height: 14px; border-radius: 50%; background: rgba(255,255,255,.4); border: 2px solid #fff; cursor: pointer; transition: all .25s; }
+        #s1:checked ~ .dots-wrap .d1,
+        #s2:checked ~ .dots-wrap .d2,
+        #s3:checked ~ .dots-wrap .d3,
+        #s4:checked ~ .dots-wrap .d4 { background: #fff; transform: scale(1.25); }
+
+        @media (max-width: 768px) { .slide img { height: 350px; } }
+        @media (max-width: 576px) { .slide img { height: 250px; } }
+
+        .modal-check { display: none; }
+        .modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,.5); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: .3s; z-index: 999; }
+        .modal-check:checked + .modal-bg { opacity: 1; visibility: visible; }
+        .modal-box { background: white; border-radius: 1rem; border: 2px solid #06B6D4; max-width: 500px; width: 90%; }
+        .modal-head { background: #06B6D4; color: white; padding: 1rem 1.5rem; border-radius: .8rem .8rem 0 0; display: flex; justify-content: space-between; align-items: center; }
+        .modal-body { padding: 2rem 1.5rem; text-align: center; }
+        .close-btn { font-size: 1.5rem; color: white; cursor: pointer; line-height: 1; border: none; background: none; }
+    </style>
+</head>
+<body style="background-color: #E0F7FA; font-family: 'Segoe UI', sans-serif;">
+
+<nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top" style="border-bottom: 3px solid #0284A7;">
+    <div class="container">
+        <a class="navbar-brand fw-bold fs-3" href="#" style="color: #0E7490;">
+            <i class="bi bi-person-heart me-2"></i>My Personal Space
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto gap-2">
+                <li class="nav-item"><a class="nav-link active text-dark fw-medium" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-dark fw-medium" href="#profile">My Profile</a></li>
+                <li class="nav-item"><a class="nav-link text-dark fw-medium" href="#hobbies">Hobbies</a></li>
+                <li class="nav-item"><a class="nav-link text-dark fw-medium" href="#gallery">Gallery</a></li>
+                <li class="nav-item"><a class="nav-link text-dark fw-medium" href="#contact">Contact Me</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section class="py-5" style="background-color: #E0F7FA;">
+    <div class="container py-5">
+        <div class="row text-center">
+            <div class="col-12 col-md-10 col-lg-8 mx-auto">
+                <h1 class="display-3 fw-bold mb-4" style="color: #0E7490;">
+                    <i class="bi bi-stars me-2"></i>Welcome to My Space
+                </h1>
+                <p class="lead fs-5 text-muted mb-4">
+                    A peaceful corner just for me where simplicity meets beauty. This is my personal space on the web. ✨
+                </p>
+                <p class="fs-6 text-muted fst-italic mb-5">"Be the best version of you."</p>
+                <a href="#profile" class="btn btn-hover px-5 rounded-pill shadow btn-lg">
+                    View My Profile <i class="bi bi-chevron-double-down ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr style="border-color: #06B6D4; opacity: 0.5;">
+
+<section id="profile" class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold display-5" style="color: #0E7490;">
+                <i class="bi bi-person-badge me-2"></i>My Profile
+            </h2>
+            <hr class="w-25 mx-auto" style="border-color: #06B6D4; border-width: 2px; opacity: 0.75;">
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="bg-white p-5 rounded-4 shadow-lg" style="border: 2px solid #06B6D4;">
+                    <div class="row align-items-center g-5">
+                        <div class="col-md-4 text-center">
+                            <img src="pictures/profile.jpg" class="rounded-circle shadow-lg mb-3" style="width: 180px; height: 180px; object-fit: cover; border: 4px solid #06B6D4;" alt="Profile">
+                            <h3 class="fw-bold fs-2" style="color: #0E7490;">Princess Mhyca Y. Garcia</h3>
+                            <p class="text-muted fs-5">@vsxalleje</p>
+                            <span class="badge rounded-pill px-3 py-2 fs-6" style="background-color: #06B6D4; color: white;">
+                                <i class="bi bi-geo-alt me-1"></i> Philippines
+                            </span>
+                        </div>
+                        <div class="col-md-8">
+                            <h4 class="fw-semibold mb-3" style="color: #0E7490;">About Me</h4>
+                            <p class="text-muted fs-5 mb-4">
+                                I am currently studying Bachelor of Science in Information Technology. I enjoy spending time with myself, learning new stuff, and just growing step by step. I believe that learning takes time, so I always try my best to improve and learn something new every day. Welcome to my little space! 💙
+                            </p>
+                            <div class="row g-3 mb-4">
+                                <div class="col-sm-6">
+                                    <div class="p-3 rounded-3 text-center" style="background-color: #CFFAFE; border: 1px solid #06B6D4;">
+                                        <i class="bi bi-sun-fill fs-2 mb-1" style="color: #06B6D4;"></i>
+                                        <h5 class="fw-bold mb-1" style="color: #0E7490;">My Mood</h5>
+                                        <p class="text-muted fw-medium mb-0">Feeling good and grateful ☀️</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="p-3 rounded-3 text-center" style="background-color: #CFFAFE; border: 1px solid #06B6D4;">
+                                        <i class="bi bi-bullseye fs-2 mb-1" style="color: #06B6D4;"></i>
+                                        <h5 class="fw-bold mb-1" style="color: #0E7490;">My Goal</h5>
+                                        <p class="text-muted fw-medium mb-0">Study hard and be a good person 🎯</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row text-center g-3">
+                                <div class="col-4"><p class="fw-bold fs-3 mb-0" style="color: #0E7490;">19</p><p class="text-muted mb-0">Age</p></div>
+                                <div class="col-4"><p class="fw-bold fs-3 mb-0" style="color: #0E7490;">∞</p><p class="text-muted mb-0">Dreams</p></div>
+                                <div class="col-4"><p class="fw-bold fs-3 mb-0" style="color: #0E7490;">2nd Year</p><p class="text-muted mb-0">Student</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr style="border-color: #06B6D4; opacity: 0.5;">
+
+<section id="hobbies" class="py-5" style="background-color: #E0F7FA;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold display-5" style="color: #0E7490;">
+                <i class="bi bi-stars me-2"></i>Things I Love
+            </h2>
+            <hr class="w-25 mx-auto" style="border-color: #06B6D4; border-width: 2px; opacity: 0.75;">
+            <p class="text-muted fs-5 mt-3">Click a card to know more about me! ✨</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <label for="m-read" class="card card-hover h-100 rounded-4 p-4 text-center" style="border: 1px solid #06B6D4; background: white;">
+                    <i class="bi bi-book display-4 mb-3" style="color: #06B6D4;"></i>
+                    <h5 class="fw-bold mb-2" style="color: #0E7490;">Reading 📖</h5>
+                    <p class="text-muted">I love getting lost in books and stories.</p>
+                </label>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <label for="m-music" class="card card-hover h-100 rounded-4 p-4 text-center" style="border: 1px solid #06B6D4; background: white;">
+                    <i class="bi bi-music-note-beamed display-4 mb-3" style="color: #06B6D4;"></i>
+                    <h5 class="fw-bold mb-2" style="color: #0E7490;">Music 🎵</h5>
+                    <p class="text-muted">Music helps me express what I can't say.</p>
+                </label>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <label for="m-bl" class="card card-hover h-100 rounded-4 p-4 text-center" style="border: 1px solid #06B6D4; background: white;">
+                    <i class="bi bi-heart-pulse display-4 mb-3" style="color: #06B6D4;"></i>
+                    <h5 class="fw-bold mb-2" style="color: #0E7490;">Watching BL Series 💜</h5>
+                    <p class="text-muted">I love watching BL series in my free time.</p>
+                </label>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <label for="m-photo" class="card card-hover h-100 rounded-4 p-4 text-center" style="border: 1px solid #06B6D4; background: white;">
+                    <i class="bi bi-camera display-4 mb-3" style="color: #06B6D4;"></i>
+                    <h5 class="fw-bold mb-2" style="color: #0E7490;">Photography 📸</h5>
+                    <p class="text-muted">I like taking photos of nice moments.</p>
+                </label>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <label for="m-nature" class="card card-hover h-100 rounded-4 p-4 text-center" style="border: 1px solid #06B6D4; background: white;">
+                    <i class="bi bi-tree display-4 mb-3" style="color: #06B6D4;"></i>
+                    <h5 class="fw-bold mb-2" style="color: #0E7490;">Nature 🌿</h5>
+                    <p class="text-muted">Being outside and seeing nature makes me happy.</p>
+                </label>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <label for="m-travel" class="card card-hover h-100 rounded-4 p-4 text-center" style="border: 1px solid #06B6D4; background: white;">
+                    <i class="bi bi-airplane display-4 mb-3" style="color: #06B6D4;"></i>
+                    <h5 class="fw-bold mb-2" style="color: #0E7490;">Travel ✈️</h5>
+                    <p class="text-muted">I want to visit new places and meet new people.</p>
+                </label>
+            </div>
+        </div>
+    </div>
+</section>
+
+<input type="checkbox" id="m-read" class="modal-check">
+<div class="modal-bg">
+    <div class="modal-box">
+        <div class="modal-head"><h5 class="fw-bold mb-0">📖 Reading</h5><label for="m-read" class="close-btn">&times;</label></div>
+        <div class="modal-body"><i class="bi bi-book display-1" style="color: #06B6D4;"></i><p class="mt-3 text-muted">I really love reading! It feels like I'm traveling to different worlds while sitting in my room. It helps me relax and learn new things. 📚</p>
+        <label for="m-read" class="btn btn-hover rounded-pill px-4 mt-3">Close</label></div>
+    </div>
+</div>
+<input type="checkbox" id="m-music" class="modal-check">
+<div class="modal-bg">
+    <div class="modal-box">
+        <div class="modal-head"><h5 class="fw-bold mb-0">🎵 Music</h5><label for="m-music" class="close-btn">&times;</label></div>
+        <div class="modal-body"><i class="bi bi-music-note-beamed display-1" style="color: #06B6D4;"></i><p class="mt-3 text-muted">Music is my daily mood booster! I listen to it when I study, when I'm happy, or when I'm sad. It just feels like it understands me. 🎧</p>
+        <label for="m-music" class="btn btn-hover rounded-pill px-4 mt-3">Close</label></div>
+    </div>
+</div>
+<input type="checkbox" id="m-bl" class="modal-check">
+<div class="modal-bg">
+    <div class="modal-box">
+        <div class="modal-head"><h5 class="fw-bold mb-0">💜 Watching BL Series</h5><label for="m-bl" class="close-btn">&times;</label></div>
+        <div class="modal-body"><i class="bi bi-heart-pulse display-1" style="color: #06B6D4;"></i><p class="mt-3 text-muted">I honestly love watching BL series so much! It's my favorite way to relax after classes. I just really enjoy the stories, the characters, and their sweet moments. It makes me happy and kilig every time I watch! I love supporting their love and just having fun watching them. It's my happy place! 💜✨</p>
+        <label for="m-bl" class="btn btn-hover rounded-pill px-4 mt-3">Close</label></div>
+    </div>
+</div>
+<input type="checkbox" id="m-photo" class="modal-check">
+<div class="modal-bg">
+    <div class="modal-box">
+        <div class="modal-head"><h5 class="fw-bold mb-0">📸 Photography</h5><label for="m-photo" class="close-btn">&times;</label></div>
+        <div class="modal-body"><i class="bi bi-camera display-1" style="color: #06B6D4;"></i><p class="mt-3 text-muted">I like taking photos of everything. I just want to keep memories alive so I can look back at them later. 📷</p>
+        <label for="m-photo" class="btn btn-hover rounded-pill px-4 mt-3">Close</label></div>
+    </div>
+</div>
+<input type="checkbox" id="m-nature" class="modal-check">
+<div class="modal-bg">
+    <div class="modal-box">
+        <div class="modal-head"><h5 class="fw-bold mb-0">🌿 Nature</h5><label for="m-nature" class="close-btn">&times;</label></div>
+        <div class="modal-body"><i class="bi bi-tree display-1" style="color: #06B6D4;"></i><p class="mt-3 text-muted">Being outdoors calms me down. Feeling the fresh air just makes me feel peaceful and refreshed. 🌱</p>
+        <label for="m-nature" class="btn btn-hover rounded-pill px-4 mt-3">Close</label></div>
+    </div>
+</div>
+<input type="checkbox" id="m-travel" class="modal-check">
+<div class="modal-bg">
+    <div class="modal-box">
+        <div class="modal-head"><h5 class="fw-bold mb-0">✈️ Travel</h5><label for="m-travel" class="close-btn">&times;</label></div>
+        <div class="modal-body"><i class="bi bi-airplane display-1" style="color: #06B6D4;"></i><p class="mt-3 text-muted">I dream of traveling around the world someday! I want to see different places, learn new cultures, and make amazing memories. It's one of my biggest goals! Gusto ko makita si PondPhuwin! ✈️</p>
+        <label for="m-travel" class="btn btn-hover rounded-pill px-4 mt-3">Close</label></div>
+    </div>
+</div>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-10 col-lg-8 mx-auto">
+                <div class="bg-white p-5 rounded-4 shadow-lg text-center" style="border-left: 5px solid #06B6D4;">
+                    <i class="bi bi-quote display-3 mb-3" style="color: #06B6D4;"></i>
+                    <blockquote class="fs-3 fst-italic text-muted mb-3">"Small progress is still progress."</blockquote>
+                    <p class="fw-semibold fs-5" style="color: #0E7490;">— My Favorite Quote</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="gallery" class="py-5" style="background-color: #E0F7FA;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold display-5" style="color: #0E7490;">
+                <i class="bi bi-images me-2"></i>My Favorite Moments
+            </h2>
+            <hr class="w-25 mx-auto" style="border-color: #06B6D4; border-width: 2px; opacity: 0.75;">
+            <p class="text-muted fs-5 mt-3">Pictures that mean a lot to me</p>
+        </div>
+
+        <div class="carousel-wrap">
+
+            <input type="radio" name="carousel" id="s1" checked>
+            <input type="radio" name="carousel" id="s2">
+            <input type="radio" name="carousel" id="s3">
+            <input type="radio" name="carousel" id="s4">
+
+            <div class="carousel-track">
+                <div class="slide"><img src="pictures/pic1.jpg" alt="Photo 1"></div>
+                <div class="slide"><img src="pictures/pic2.jpg" alt="Photo 2"></div>
+                <div class="slide"><img src="pictures/pic3.jpg" alt="Photo 3"></div>
+                <div class="slide"><img src="pictures/pic4.jpg" alt="Photo 4"></div>
+            </div>
+
+            <div class="btn-wrap">
+
+                <label class="nav-btn prev btn-s1" for="s4"><i class="bi bi-chevron-left"></i></label>
+                <label class="nav-btn next btn-s1" for="s2"><i class="bi bi-chevron-right"></i></label>
+
+                <label class="nav-btn prev btn-s2" for="s1"><i class="bi bi-chevron-left"></i></label>
+                <label class="nav-btn next btn-s2" for="s3"><i class="bi bi-chevron-right"></i></label>
+
+                <label class="nav-btn prev btn-s3" for="s2"><i class="bi bi-chevron-left"></i></label>
+                <label class="nav-btn next btn-s3" for="s4"><i class="bi bi-chevron-right"></i></label>
+
+                <label class="nav-btn prev btn-s4" for="s3"><i class="bi bi-chevron-left"></i></label>
+                <label class="nav-btn next btn-s4" for="s1"><i class="bi bi-chevron-right"></i></label>
+            </div>
+
+            <div class="dots-wrap">
+                <label class="dot d1" for="s1" title="Photo 1"></label>
+                <label class="dot d2" for="s2" title="Photo 2"></label>
+                <label class="dot d3" for="s3" title="Photo 3"></label>
+                <label class="dot d4" for="s4" title="Photo 4"></label>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold display-5" style="color: #0E7490;">
+                <i class="bi bi-envelope-heart me-2"></i>Contact Me
+            </h2>
+            <hr class="w-25 mx-auto" style="border-color: #06B6D4; border-width: 2px; opacity: 0.75;">
+            <p class="text-muted fs-5 mt-3">I'd love to hear from you! Send me a message 💌</p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="bg-white p-5 rounded-4 shadow-lg" style="border: 2px solid #06B6D4;">
+                    <form>
+                        <div class="mb-4">
+                            <label class="form-label fw-medium" style="color: #0E7490;">Name</label>
+                            <input type="text" class="form-control rounded-3 py-2" style="border-color: #06B6D4;" placeholder="Mhyca Alleje">
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label fw-medium" style="color: #0E7490;">Email Address</label>
+                            <input type="email" class="form-control rounded-3 py-2" style="border-color: #06B6D4;" placeholder="mhycaalleje@gmail.com">
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label fw-medium" style="color: #0E7490;">Your Message</label>
+                            <textarea class="form-control rounded-3 py-2" style="border-color: #06B6D4;" rows="4" placeholder="Write something nice here..."></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-hover btn-lg px-5 rounded-pill">
+                                <i class="bi bi-send me-2"></i>Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-white py-3" style="border-top: 2px solid #06B6D4;">
+    <div class="container text-center py-1">
+        <p class="mb-1" style="color: #0E7490; font-size: 1.1rem;">
+            Made with <i class="bi bi-heart-fill"></i> Princess Mhyca Y. Garcia
+        </p>
+        <p class="text-muted small mb-0">© 2026 My Personal Space. All Rights Reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>
